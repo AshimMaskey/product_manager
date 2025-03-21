@@ -4,7 +4,7 @@ import { connectDB } from "./config/db.js";
 import productRoute from "./routes/product.route.js"
 
 dotenv.config();
-const PORT=8000;
+const PORT=process.env.PORT || 8000;
 const app=express();
 
 //middlewares
