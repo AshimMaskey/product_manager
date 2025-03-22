@@ -14,7 +14,7 @@ import React, { useState } from "react";
 import { MdOutlineBrowserUpdated } from "react-icons/md";
 
 interface Product {
-  _id: string;
+  _id?: string;
   name: string;
   price: number;
   image: string;

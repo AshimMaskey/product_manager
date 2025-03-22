@@ -1,7 +1,6 @@
 import { useProductStore } from "@/store/productStore";
 import React from "react";
 import { MdDeleteForever } from "react-icons/md";
-import { MdOutlineBrowserUpdated } from "react-icons/md";
 
 import {
   AlertDialog,
@@ -19,7 +18,7 @@ interface Product {
   name: string;
   price: number;
   image: string;
-  _id: string;
+  _id?: string;
 }
 
 interface ProductCardProps {
@@ -62,7 +61,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
                   <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
                     <AlertDialogAction
-                      onClick={() => deleteProduct(product._id)}
+                      onClick={() => deleteProduct(product._id ?? "")}
                     >
                       Continue
                     </AlertDialogAction>

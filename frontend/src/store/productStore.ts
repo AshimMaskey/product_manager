@@ -6,7 +6,7 @@ interface Product {
   name: string;
   price: number;
   image: string;
-  _id: string;
+  _id?: string;
 }
 
 interface ProductStore {
