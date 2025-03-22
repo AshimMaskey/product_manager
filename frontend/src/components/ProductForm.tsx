@@ -13,6 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useProductStore } from "@/store/productStore"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -36,8 +37,9 @@ export default function ProductForm() {
 		},
 	  });
 
+    const {createProduct}=useProductStore();
 	  function onSubmit(values: z.infer<typeof formSchema>) {
-		console.log(values)
+		createProduct(values);
 	  }
 
   return (

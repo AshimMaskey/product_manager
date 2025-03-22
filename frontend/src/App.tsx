@@ -3,6 +3,7 @@ import Layout from './layout/Layout'
 import { ThemeProvider } from "@/components/theme-provider"
 import HomePage from './pages/HomePage'
 import CreatePage from './pages/CreatePage'
+import {Toaster} from "react-hot-toast";
 
 const App = () => {
   return (
@@ -13,7 +14,9 @@ const App = () => {
       <Route path='create' element={<CreatePage/>}/>
       </Route>
     </Routes>
+    <Toaster />
     </ThemeProvider>
+    
   )
 }
 
