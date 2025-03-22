@@ -13,6 +13,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import UpdateDialog from "./UpdateDialog";
 
 interface Product {
   name: string;
@@ -47,7 +48,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
               Price: Rs. {product.price}
             </h5>
             <div className="flex flex-row justify-between">
-              <MdOutlineBrowserUpdated className="size-8 hover:cursor-pointer" />
+              <UpdateDialog product={product} />
 
               {/* Delete functionality */}
               <AlertDialog>

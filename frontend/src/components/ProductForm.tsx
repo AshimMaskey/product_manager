@@ -1,9 +1,10 @@
-"use client"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
+"use client";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Loader2 } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -11,9 +12,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { useProductStore } from "@/store/productStore"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useProductStore } from "@/store/productStore";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -25,22 +26,22 @@ const formSchema = z.object({
   image: z.string().url({
     message: "Enter the valid image url.",
   }),
-})
+});
 
 export default function ProductForm() {
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
-		defaultValues: {
-		  name: "",
-		  price:0,
-		  image:"",
-		},
-	  });
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      price: 0,
+      image: "",
+    },
+  });
 
-    const {createProduct}=useProductStore();
-	  function onSubmit(values: z.infer<typeof formSchema>) {
-		createProduct(values);
-	  }
+  const { createProduct, isAdding } = useProductStore();
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    createProduct(values);
+  }
 
   return (
     <Form {...form}>
@@ -78,14 +79,24 @@ export default function ProductForm() {
             <FormItem>
               <FormLabel>Image URL:</FormLabel>
               <FormControl>
-                <Input placeholder="Enter the product's image url..." {...field} />
+                <Input
+                  placeholder="Enter the product's image url..."
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Add Product</Button>
+        {!isAdding ? (
+          <Button type="submit">Add Product</Button>
+        ) : (
+          <Button disabled>
+            <Loader2 className="animate-spin" />
+            Please wait
+          </Button>
+        )}
       </form>
     </Form>
-  )
+  );
 }
